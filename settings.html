@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting - Pomodoro</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <main class="settings">
+    <h3 class="settings__title">Setting</h3>
+
+    <div class="field">
+      <label class="field__label" for="focus-minutes">타이머 시간</label>
+      <div class="field__input">
+        <input type="number" id="focus-minutes" name="focus-minutes"
+               min="1" max="120" step="1" value="25" inputmode="numeric">
+        <span class="field__unit">분</span>
+      </div>
+      <p class="field__error" id="error" role="alert" hidden></p>
+    </div>
+
+    <button type="button" class="btn btn--primary" id="apply">설정 완료</button>
+  </main>
+
+  <script src="storage.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>
