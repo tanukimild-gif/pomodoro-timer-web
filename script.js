@@ -5,6 +5,7 @@ const display = document.getElementById("display");
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 const resetBtn = document.getElementById("reset");
+const clock = document.getElementById("clock");
 
 let remainingMs = TOTAL_MS;
 let endsAt = 0;
@@ -17,6 +18,16 @@ function render() {
 
   display.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   display.setAttribute("datetime", `PT${minutes}M${seconds}S`);
+}
+
+function renderClock() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, "0");
+  const mm = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+
+  clock.textContent = `${hh}:${mm}:${ss}`;
+  clock.setAttribute("datetime", `${hh}:${mm}:${ss}`);
 }
 
 function updateButtons() {
@@ -72,3 +83,10 @@ resetBtn.addEventListener("click", reset);
 
 render();
 updateButtons();
+
+renderClock();
+// 초가 바뀌는 시점에 맞춰 갱신을 시작한 뒤 1초 간격으로 유지한다.
+setTimeout(() => {
+  renderClock();
+  setInterval(renderClock, 1000);
+}, 1000 - (Date.now() % 1000));
